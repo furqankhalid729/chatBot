@@ -194,11 +194,15 @@ $(document).ready(function () {
         setTimeout(function () {
             if ($.trim(val) == '') {
                 val = 'I couldn\'t get that. Let\' try something else!'
-                var BotResponse = '<p class="botResult">' + val + '</p><div class="clearfix"></div>';
+                var BotResponse = '<div class="botResult">' + val + '</div><div class="clearfix"></div>';
                 $(BotResponse).appendTo('#result_div');
             } else {
                 val = val.replace(new RegExp('\r?\n', 'g'), '<br />');
-                var BotResponse = '<p class="botResult">' + val + '</p><div class="clearfix"></div>';
+                val = val.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                // val = val.replace(/- (.*?)(<br \/>|$)/g, '<li>$1</li>');
+                // val = val.replace(/(<li>.*<\/li>)/g, '<ul>$1</ul>');
+                val = val.replace(/\[([^\]]+)\]\((https?:\/\/[^\)]+)\)/g, '<a href="$2" target="_blank">$1</a>');
+                var BotResponse = '<div class="botResult">' + val + '</div><div class="clearfix"></div>';
                 $(BotResponse).appendTo('#result_div');
             }
             scrollToBottomOfResults();

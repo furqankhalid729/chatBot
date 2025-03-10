@@ -1,16 +1,10 @@
-
-
 $(document).ready(function () {
-
-    // Credentials
-    var baseUrl = "https://api.api.ai/v1/query?v=20160910&";
-    var accessToken = "553ab6017e584e0fa351952c8c9ca956";
 
     //---------------------------------- Add dynamic html bot content(Widget style) ----------------------------
     // You can also add the html content in html page and still it will work!
     var mybot = '<div class="chatCont" id="chatCont">' +
         '<div class="bot_profile">' +
-        '<img src="/storage/images/bot1.png" class="bot_p_img">' +
+        '<img src="storage/images/bot.png" class="bot_p_img">' +
         '<div class="close">' +
         '<i class="fa fa-times" aria-hidden="true"></i>' +
         '</div>' +
@@ -114,24 +108,47 @@ $(document).ready(function () {
 
     //------------------------------------------- Send request to API.AI ---------------------------------------
     function send(text) {
+        let csrfToken = $('meta[name="csrf-token"]').attr('content');
+        const sessionData = getSessionData();
+        const requestData = {
+            message: text
+        };
+        if (sessionData.runID && sessionData.threadID) {
+            requestData.runID = sessionData.runID;
+            requestData.threadID = sessionData.threadID;
+        }
         $.ajax({
-            type: "GET",
-            url: baseUrl + "query=" + text + "&lang=en-us&sessionId=" + mysession,
-            contentType: "application/json",
-            dataType: "json",
+            url: "api/chat-receive",
+            type: "POST",
             headers: {
-                "Authorization": "Bearer " + accessToken
+                "X-CSRF-TOKEN": csrfToken
             },
-            // data: JSON.stringify({ query: text, lang: "en", sessionId: "somerandomthing" }),
-            success: function (data) {
-                main(data);
-                // console.log(data);
+            data: requestData,
+            success: function (response) {
+                console.log("AI Response:", response);
+                setSessionData(response.runID, response.threadID)
+                setBotResponse(response.message[0].text.value);
             },
-            error: function (e) {
-                console.log(e);
+            error: function (xhr) {
+                console.error("Error:", xhr.responseText);
             }
         });
     }
+
+    //------------------------------------------- Check Session ---------------------------------------
+    const setSessionData = (runID, threadID) => {
+        if (!sessionStorage.getItem("runID") && !sessionStorage.getItem("threadID")) {
+            sessionStorage.setItem("runID", runID);
+            sessionStorage.setItem("threadID", threadID);
+        }
+    };
+
+    const getSessionData = () => {
+        return {
+            runID: sessionStorage.getItem("runID"),
+            threadID: sessionStorage.getItem("threadID")
+        };
+    };
 
 
     //------------------------------------------- Main function ------------------------------------------------
@@ -169,11 +186,15 @@ $(document).ready(function () {
         setTimeout(function () {
             if ($.trim(val) == '') {
                 val = 'I couldn\'t get that. Let\' try something else!'
-                var BotResponse = '<p class="botResult">' + val + '</p><div class="clearfix"></div>';
+                var BotResponse = '<div class="botResult">' + val + '</div><div class="clearfix"></div>';
                 $(BotResponse).appendTo('#result_div');
             } else {
                 val = val.replace(new RegExp('\r?\n', 'g'), '<br />');
-                var BotResponse = '<p class="botResult">' + val + '</p><div class="clearfix"></div>';
+                val = val.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                // val = val.replace(/- (.*?)(<br \/>|$)/g, '<li>$1</li>');
+                // val = val.replace(/(<li>.*<\/li>)/g, '<ul>$1</ul>');
+                val = val.replace(/\[([^\]]+)\]\((https?:\/\/[^\)]+)\)/g, '<a href="$2" target="_blank">$1</a>');
+                var BotResponse = '<div class="botResult">' + val + '</div><div class="clearfix"></div>';
                 $(BotResponse).appendTo('#result_div');
             }
             scrollToBottomOfResults();
