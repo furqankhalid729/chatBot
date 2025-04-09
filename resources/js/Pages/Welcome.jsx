@@ -1,4 +1,5 @@
 import { Head, Link } from '@inertiajs/react';
+import React, { useEffect } from "react";
 
 export default function Welcome({ auth, laravelVersion, phpVersion }) {
     const handleImageError = () => {
@@ -11,10 +12,29 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
             ?.classList.add('!flex-row');
         document.getElementById('background')?.classList.add('!hidden');
     };
+    // useEffect(() => {
+    //     // Load jQuery
+    //     const jqueryScript = document.createElement("script");
+    //     jqueryScript.src = "https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js";
+    //     jqueryScript.async = true;
+    
+    //     // Load your bot.js
+    //     const botScript = document.createElement("script");
+    //     botScript.src = "/storage/js/bot.js"; // Adjust path if needed
+    //     botScript.async = true;
+    
+    //     document.body.appendChild(jqueryScript);
+    //     document.body.appendChild(botScript);
+    
+    //     return () => {
+    //       document.body.removeChild(jqueryScript);
+    //       document.body.removeChild(botScript);
+    //     };
+    //   }, []);
 
     return (
         <>
-            <Head title="Welcome" />
+            <Head title="Welcome test" />
             <div className="bg-gray-50 text-black/50 dark:bg-black dark:text-white/50">
                 <img
                     id="background"
@@ -356,6 +376,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                     </div>
                 </div>
             </div>
+            {/* <mybot></mybot> */}
         </>
     );
 }
