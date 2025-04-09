@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Http;
 use OpenAI\Laravel\Facades\OpenAI;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Cache;
+use App\Models\Thread;
 
 class chatController extends Controller
 {
@@ -27,12 +28,15 @@ class chatController extends Controller
         if (empty($threadID)) {
             $thread = $this->createThread();
             $threadID = $thread->id;
+            Thread::create([
+                'thread_id' => $threadID,
+            ]);
         }
         $this->createMessage($message, $threadID);
 
         $run = OpenAI::threads()->runs()->create($threadID, [
             'assistant_id' => $assistantId,
-            'instructions' => "You must use the `fetch_job_feed` tool to retrieve jobs before responding. Do not answer without fetching the job feed.",
+            'instructions' => "When a user mentions they are hiring or looking for labor (e.g., 'I need to hire an electrician, need skilled worker, need honest labour'), respond with the following staffing inquiry details:\n\nPhone: (855) 756-9675\nHours: Mon-Sun, 8 AM – 5 PM\nEmail: info@myqlm.com\n\nAlternatively, provide the link for submitting requirements: https://myqlm.com/contact/",
             'tools' => [
                 [
                     'type' => 'function',

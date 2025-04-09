@@ -1,128 +1,20 @@
-@import 'tailwindcss';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../storage/framework/views/*.php';
-@source "../**/*.blade.php";
-@source "../**/*.js";
-@source "../**/*.vue";
-
-@theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
-}
-
-
-/* General */
-body {
-  font-family: 'Open Sans', sans-serif;
-  font-size: 14px;
-  line-height: 1.42857143;
-  color: #333;
-}
-
-* {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
-
-img {
-  -webkit-user-drag: none;
-  -moz-user-drag: none;
-  -khtml-user-drag: none;
-}
-
-a,
-a:hover,
-a:focus {
-  text-decoration: none;
-  outline: none;
-}
-
-.width100 {
-  width: 100%;
-}
-
-.text-center {
-  text-align: center;
-}
-
-.container {
-  padding-right: 15px;
-  padding-left: 15px;
-  margin-right: auto;
-  margin-left: auto;
-}
-.form-control {
-  display: block;
-  width: 100%;
-  height: 34px;
-  padding: 6px 12px;
-  font-size: 14px;
-  outline: none;
-  font-family: 'Open Sans', sans-serif;
-}
-
-/* General end*/
-
-
-/* Demo */
-.hd1 {
-  margin-top: 15vh;
-  font-size: 50px;
-  font-weight: 100;
-}
-
-.powered {
-  font-size: 17px;
-  margin-top: 20px;
-}
-
-.powered img {
-  width: 110px;
-  position: relative;
-  top: 8px;
-}
-
-.footer {
-  margin-top: 50px;
-  position: absolute;
-  bottom: 40px;
-  width: auto;
+#custom-bot.center .chatCont,
+#custom-bot.center .profile_div {
   left: 0;
   right: 0;
   margin: 0 auto;
 }
 
-.foo-txt {
-  font-size: 15px;
-  font-weight: 400;
-  font-family: 'Satisfy', cursive;
-  text-shadow: none;
-  color: #272727;
-}
-
-.fa-heart {
-  color: #fb2323;
-}
-/* Demo end */
-
-
-
-/* MyBot */
-mybot.center .chatCont,
-mybot.center .profile_div {
-  left: 0;
-  right: 0;
-  margin: 0 auto;
-}
-
-mybot.left .chatCont,
-mybot.left .profile_div {
+#custom-bot.left .chatCont,
+#custom-bot.left .profile_div {
   left: 0;
 }
 
-mybot .chatCont {
+#custom-bot .chatCont {
   position: fixed;
   width: 400px;
   height: 400px !important;
@@ -135,7 +27,7 @@ mybot .chatCont {
 display: none;
 }
 
-mybot .close {
+#custom-bot .close {
   position: absolute;
   right: 5px;
   margin-top: -60px;
@@ -144,7 +36,7 @@ mybot .close {
   cursor: pointer;
 }
 
-mybot .bot_profile {
+#custom-bot .bot_profile {
   position: absolute;
   right: 0;
   margin-top: -45px;
@@ -154,7 +46,7 @@ mybot .bot_profile {
   z-index: 1000;
 }
 
-mybot .bot_p_img {
+#custom-bot .bot_p_img {
   width: 80px;
   border-radius: 50%;
   width: 80px;
@@ -163,7 +55,7 @@ mybot .bot_p_img {
   box-shadow: 0 0px 1px 0 rgba(0,0,0,0.16), 0 0px 10px 0 rgba(0,0,0,0.12);
 }
 
-mybot .chatForm {
+#custom-bot .chatForm {
   position: absolute;
   bottom: -65px;
 	right: 0;
@@ -172,8 +64,8 @@ mybot .chatForm {
   display: none;
 }
 
-mybot .bot-txt,
-mybot .bot-txt:focus {
+#custom-bot .bot-txt,
+#custom-bot .bot-txt:focus {
   box-shadow: none;
   border-radius: 0;
   height: 66px;
@@ -182,7 +74,7 @@ mybot .bot-txt:focus {
   border-left: 1px solid #dcdcdc;
 }
 
-mybot .resultDiv .botResult {
+#custom-bot .resultDiv .botResult {
   background: #fff;
   color: #000;
   border-radius: 3px;
@@ -199,7 +91,7 @@ mybot .resultDiv .botResult {
   position: relative;
 }
 
-mybot .resultDiv .botResult:before {
+#custom-bot .resultDiv .botResult:before {
   content: "";
   position: absolute;
   width: 0;
@@ -211,7 +103,7 @@ mybot .resultDiv .botResult:before {
   margin-top: -12px;
 }
 
-mybot .resultDiv .userEnteredText {
+#custom-bot .resultDiv .userEnteredText {
   background: #9C27B0;
   float: right;
   color: #ffffff;
@@ -230,7 +122,7 @@ mybot .resultDiv .userEnteredText {
   word-wrap: break-word;
 }
 
-mybot .resultDiv .userEnteredText:before {
+#custom-bot .resultDiv .userEnteredText:before {
   content: "";
   width: 0;
   height: 0;
@@ -242,7 +134,7 @@ mybot .resultDiv .userEnteredText:before {
   margin-top: -12px;
 }
 
-mybot .profile_div {
+#custom-bot .profile_div {
   position: fixed;
   bottom: 0;
   right: 10px;
@@ -250,14 +142,14 @@ mybot .profile_div {
   cursor: pointer;
 }
 
-mybot .img-profile {
+#custom-bot .img-profile {
   width: 65px;
   box-shadow: 0 0px 1px 0 rgba(0,0,0,0.16), 0 0px 10px 0 rgba(0,0,0,0.12);
   background: white;
   border-radius: 50px;
 }
 
-mybot .col-hgt {
+#custom-bot .col-hgt {
   height: 100px;
   display: flex;
   align-items: center;
@@ -265,14 +157,14 @@ mybot .col-hgt {
   margin-right: 10px;
 }
 
-mybot .chat-txt {
+#custom-bot .chat-txt {
   box-shadow: 0 0px 1px 0 rgba(0,0,0,0.16),0 0px 10px 0 rgba(0,0,0,0.12);
   padding: 15px 15px;
   border-radius: 50px;
 }
 
 /* Spinner start */
-mybot .spinner {
+#custom-bot .spinner {
   background: #9C27B0;
   width: 70px;
   text-align: center;
@@ -285,7 +177,7 @@ mybot .spinner {
   border-top-left-radius: 0;
 }
 
-mybot .spinner:before {
+#custom-bot .spinner:before {
   content: "";
   position: absolute;
   width: 0;
@@ -297,7 +189,7 @@ mybot .spinner:before {
   margin-top: -7px;
 }
 
-mybot .spinner > div {
+#custom-bot .spinner > div {
   width: 10px;
   height: 10px;
   background-color: #fff;
@@ -308,12 +200,12 @@ mybot .spinner > div {
   margin-right: 5px;
 }
 
-mybot .spinner .bounce1 {
+#custom-bot .spinner .bounce1 {
   -webkit-animation-delay: -0.32s;
   animation-delay: -0.32s;
 }
 
-mybot .spinner .bounce2 {
+#custom-bot .spinner .bounce2 {
   -webkit-animation-delay: -0.16s;
   animation-delay: -0.16s;
 }
@@ -336,7 +228,7 @@ mybot .spinner .bounce2 {
 
 
 /* Suggestions */
-mybot .suggestion {
+#custom-bot .suggestion {
   background: #fff;
   color: #000;
   border-radius: 3px;
@@ -353,7 +245,7 @@ mybot .suggestion {
   position: relative;
 }
 
-mybot .suggestion:before {
+#custom-bot .suggestion:before {
   content: "";
   position: absolute;
   width: 0;
@@ -365,7 +257,7 @@ mybot .suggestion:before {
   margin-top: -12px;
 }
 
-mybot .suggestion .sugg-options {
+#custom-bot .suggestion .sugg-options {
   display: block;
   background: #9c27b0;
   color: #fff;
@@ -378,13 +270,13 @@ mybot .suggestion .sugg-options {
   font-weight: 300;
 }
 
-mybot .suggestion .sugg-title {
+#custom-bot .suggestion .sugg-title {
   font-size: 15px;
   font-weight: 300;
   margin-bottom: 10px;
 }
 
-mybot .suggestion span:last-child {
+#custom-bot .suggestion span:last-child {
   margin-bottom: 0;
 }
 /* Suggestions end */
@@ -397,18 +289,18 @@ mybot .suggestion span:last-child {
 
 
 @media screen and (max-width: 500px) {
-  mybot .resultDiv .userEnteredText,
-  mybot .resultDiv .botResult,
-  mybot .suggestion {
+  #custom-bot .resultDiv .userEnteredText,
+  #custom-bot .resultDiv .botResult,
+  #custom-bot .suggestion {
     width: 90%;
     margin-bottom: 20px;
   }
-  mybot .chatCont,
-  mybot .chatForm {
+  #custom-bot .chatCont,
+  #custom-bot .chatForm {
     width: 100%;
   }
-  mybot .chatCont {
+  #custom-bot .chatCont {
     height: 70% !important;
   }
 }
-/* MyBot end */
+/* #custom-bot end */
