@@ -220,7 +220,7 @@ class chatController extends Controller
                         'title' => (string) $job->{'job-title'},
                         'location' => (string) $job->city . ', ' . (string) $job->state,
                         'description' => strip_tags((string) $job->{'job-description'}),
-                        'link' => "https://myqlm.com/open-positions/",
+                        'link' => "https://myqlm.com/open-positions/". strtolower(str_replace(' ', '-', (string) $job->{'job-title'})),
                     ];
                 }
 
